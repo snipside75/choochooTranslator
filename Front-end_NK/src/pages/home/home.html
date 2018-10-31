@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      VR Translator
+    </ion-title>
+    <button ion-button menuToggle icon-only right padding-right>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-menu side="right" [content]="content">
+  <ion-content>
+    <ion-list>
+      <button ion-item>
+        Settings
+      </button>
+      <button ion-item>
+        Logout
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+          <ion-item>
+              <ion-label>From:</ion-label>
+              <ion-select [(ngModel)]="fromLang">
+                  <ion-option value=0>Finnish</ion-option>
+                  <ion-option value=1>English</ion-option>
+                  <ion-option value=2>Swedish</ion-option>
+                  <ion-option value=3>German</ion-option>
+                </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>To:</ion-label>
+              <ion-select [(ngModel)]="toLang">
+                  <ion-option value=0>Finnish</ion-option>
+                  <ion-option value=1>English</ion-option>
+                  <ion-option value=2>Swedish</ion-option>
+                  <ion-option value=3>German</ion-option>
+                </ion-select>
+          </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-searchbar
+        [(ngModel)]="myInput"
+        [showCancelButton]="shouldShowCancel"
+        (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+      </ion-searchbar>
+    </ion-row>
+    <ion-grid>
+        <ion-list>
+            <button ion-item *ngFor="let item of items"(click)="itemSelected($event, item)" >
+              {{ item.original }}
+            </button>  
+          </ion-list>
+    </ion-grid>
+  </ion-grid>
+</ion-content>
