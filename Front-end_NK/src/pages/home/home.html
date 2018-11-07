@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      <img height="16px" src="../../assets/imgs/VR-logo-black.png" />
+  <ion-navbar class="navbar" color="vr_green">
+    <ion-title >
+      <img height="16px" src="../../assets/imgs/vr_logo_small_white.png" />
        Translator
     </ion-title>
     <button ion-button menuToggle icon-only right padding-right>
@@ -31,7 +31,7 @@
   <ion-grid>
     <ion-row>
           <ion-item>
-              <ion-label>From:</ion-label>
+              <ion-label class="label1">From:</ion-label>
               <ion-select [(ngModel)]="fromLang" (ionChange)="onInput($event)">
                   <ion-option value=0>Finnish</ion-option>
                   <ion-option value=1>English</ion-option>
