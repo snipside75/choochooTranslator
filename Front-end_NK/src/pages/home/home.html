@@ -1,7 +1,8 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      VR Translator
+      <img height="16px" src="../../assets/imgs/VR-logo-black.png" />
+       Translator
     </ion-title>
     <button ion-button menuToggle icon-only right padding-right>
       <ion-icon name='menu'></ion-icon>
@@ -13,7 +14,7 @@
 <ion-menu side="right" [content]="content">
   <ion-content>
     <ion-list>
-      <button ion-item>
+      <button ion-item (click)="openSettings($event)">
         Settings
       </button>
       <button ion-item>
@@ -31,7 +32,7 @@
     <ion-row>
           <ion-item>
               <ion-label>From:</ion-label>
-              <ion-select [(ngModel)]="fromLang">
+              <ion-select [(ngModel)]="fromLang" (ionChange)="onInput($event)">
                   <ion-option value=0>Finnish</ion-option>
                   <ion-option value=1>English</ion-option>
                   <ion-option value=2>Swedish</ion-option>
@@ -40,7 +41,7 @@
           </ion-item>
           <ion-item>
               <ion-label>To:</ion-label>
-              <ion-select [(ngModel)]="toLang">
+              <ion-select [(ngModel)]="toLang" (ionChange)="onInput($event)">
                   <ion-option value=0>Finnish</ion-option>
                   <ion-option value=1>English</ion-option>
                   <ion-option value=2>Swedish</ion-option>
@@ -50,7 +51,7 @@
     </ion-row>
     <ion-row>
       <ion-searchbar
-        [(ngModel)]="myInput"
+        [(ngModel)]="filter"
         [showCancelButton]="shouldShowCancel"
         (ionInput)="onInput($event)"
         (ionCancel)="onCancel($event)">
@@ -60,6 +61,8 @@
         <ion-list>
             <button ion-item *ngFor="let item of items"(click)="itemSelected($event, item)" >
               {{ item.original }}
+              <ion-icon name="arrow-round-forward"></ion-icon>
+              {{item.word}}
             </button>  
           </ion-list>
     </ion-grid>
