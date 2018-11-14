@@ -30,6 +30,12 @@ export class HomePage {
         return item.original.toLowerCase().includes(filter.toLowerCase());
       });
     }
+
+    this.storage.get('isListLimited').then(value=>{
+      if(value){
+        this.items = this.items.slice(0,49);
+      }
+    }).catch();
   }
 
   setItems(){
@@ -75,6 +81,8 @@ export class HomePage {
     
     this.fromLang = 0;
     this.toLang = 1;
+
+
   }
 
   getItemsStorage(){
@@ -82,6 +90,7 @@ export class HomePage {
       this.storage.get('dictionary').then((value)=>{
         let translationList: Array<Translation>;
         translationList = value.translations;
+        console.log(translationList);
         this.items = [];
   
         //this is not really efficient. needs to be hashmap?

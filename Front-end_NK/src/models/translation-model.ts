@@ -1,7 +1,7 @@
 import { Language } from './language-model';
 
 export class Translation{
-    public id: Number;
+    public id: string;
     public word_id: Number;
     public word: string;
     public description: string;
@@ -11,7 +11,7 @@ export class Translation{
     public language: Language;
     public date_created: Date;
     public date_modified: Date;
-    constructor(id: Number, word_id: Number, word: string, description: string, example: string, user: Number, version: Number, language: Language, date_created: Date, date_modified: Date){
+    constructor(id: string, word_id: Number, word: string, description: string, example: string, user: Number, version: Number, language: Language, date_created: Date, date_modified: Date){
         this.id = id;
         this.word_id = word_id;
         this.word = word;

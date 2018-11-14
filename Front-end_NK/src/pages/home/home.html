@@ -27,7 +27,7 @@
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
 
 
-<ion-content padding>
+<ion-content overflow-scroll = "true">
   <ion-grid>
     <ion-row>
           <ion-item>
@@ -57,14 +57,11 @@
         (ionCancel)="onCancel($event)">
       </ion-searchbar>
     </ion-row>
-    <ion-grid>
         <ion-list>
             <button ion-item *ngFor="let item of items"(click)="itemSelected($event, item)" >
-              {{ item.original }}
-              <ion-icon name="arrow-round-forward"></ion-icon>
-              {{item.word}}
-            </button>  
-          </ion-list>
-    </ion-grid>
+              <h2>{{ item.original }}</h2>
+              <p>{{item.word}}</p>
+            </button> 
+        </ion-list>
   </ion-grid>
 </ion-content>

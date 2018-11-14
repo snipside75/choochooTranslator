@@ -7,9 +7,12 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <h3>{{item.original}} – {{item.word}}</h3>
-    <h4>Defintion</h4>
+    <h4>{{item.original}}</h4>
+    <hr>
+    <h5>Translation</h5>
+    <p>{{item.word}}</p>
+    <h5 *ngIf="item.defintion.length > 0">Usage Note</h5>
     <p>{{item.defintion}}</p>
-    <h4>Example</h4>
+    <h5 *ngIf="item.example.length > 0">Example</h5>
     <p>{{item.example}}</p>
 </ion-content>
