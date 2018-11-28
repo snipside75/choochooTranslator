@@ -7,7 +7,7 @@ from ExtendedRegisterForm import ExtendedRegisterForm
 # import ExtendedRegisterForm
 from models import db, User, Role
 from flask_mail import Mail
-import logout, users
+import logout, users, translator
 
 # create and configure the app
 app = Flask(__name__, instance_relative_config=True)
@@ -49,19 +49,20 @@ security = Security(app, user_datastore, register_form=ExtendedRegisterForm)
 
 db.init_app(app)
 
+
 # Setting up the database for models when the app first runs
 @app.before_first_request
 def initdb_command():
     db.create_all()
 
+
 # Registering all the blueprints
 app.register_blueprint(logout.bp)
 app.register_blueprint(users.bp)
-
+app.register_blueprint(translator.bp)
 
 if __name__ == '__main__':
     # allowing cross origin requests
     CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
     # serving the application
-    app.run(host='0.0.0.0', port=5000)
-
+    app.run(port=5000)

@@ -72,6 +72,7 @@ class Mysql:
         query += " FROM %s" % table
         if where:
             query += " WHERE %s" % where
+        print (query)
         try:
             self._open()
             self.__session.execute(query)
