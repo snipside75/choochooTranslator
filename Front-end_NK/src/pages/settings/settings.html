@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar color="vr_green">
+        <ion-title>
+            Settings
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <h3>Debug Commands</h3>
+    <button ion-button (click)='downloadDict($event)'>Download Dictionary</button>
+    <button ion-button color="danger" (click)='deleteDict($event)'>Delete</button>
+    <h3>Settings:</h3>
+    <ion-item>
+        <ion-label>Limit word list length</ion-label>
+        <ion-checkbox color="dark" [(ngModel)]="isListLimited" (ngModelChange)="toggleListLimited()"></ion-checkbox>
+      </ion-item>
+</ion-content>

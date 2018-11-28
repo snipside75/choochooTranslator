@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar class="navbar" color="vr_green">
+    <ion-title >
+      <img height="16px" src="../../assets/imgs/vr_logo_small_white.png" />
+       Translator
+    </ion-title>
+    <button ion-button menuToggle icon-only right padding-right>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-menu side="right" [content]="content">
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openSettings($event)">
+        Settings
+      </button>
+      <button ion-item>
+        Logout
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+
+
+<ion-content overflow-scroll = "true">
+  <ion-grid>
+    <ion-row>
+          <ion-item>
+              <ion-label class="label1">From:</ion-label>
+              <ion-select [(ngModel)]="fromLang" (ionChange)="onInput($event)">
+                  <ion-option value=0>Finnish</ion-option>
+                  <ion-option value=1>English</ion-option>
+                  <ion-option value=2>Swedish</ion-option>
+                  <ion-option value=3>German</ion-option>
+                </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>To:</ion-label>
+              <ion-select [(ngModel)]="toLang" (ionChange)="onInput($event)">
+                  <ion-option value=0>Finnish</ion-option>
+                  <ion-option value=1>English</ion-option>
+                  <ion-option value=2>Swedish</ion-option>
+                  <ion-option value=3>German</ion-option>
+                </ion-select>
+          </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-searchbar
+        [(ngModel)]="filter"
+        [showCancelButton]="shouldShowCancel"
+        (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+      </ion-searchbar>
+    </ion-row>
+        <ion-list>
+            <button ion-item *ngFor="let item of items"(click)="itemSelected($event, item)" >
+              <h2>{{ item.original }}</h2>
+              <p>{{item.word}}</p>
+            </button> 
+        </ion-list>
+  </ion-grid>
+</ion-content>

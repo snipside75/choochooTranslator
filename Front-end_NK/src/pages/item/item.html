@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar color="vr_green">
+        <ion-title>
+                <img height="16px" src="../../assets/imgs/vr_logo_small_white.png" />
+             Translator
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <h4>{{item.original}}</h4>
+    <hr>
+    <h5>Translation</h5>
+    <p>{{item.word}}</p>
+    <h5 *ngIf="item.defintion.length > 0">Usage Note</h5>
+    <p>{{item.defintion}}</p>
+    <h5 *ngIf="item.example.length > 0">Example</h5>
+    <p>{{item.example}}</p>
+</ion-content>
