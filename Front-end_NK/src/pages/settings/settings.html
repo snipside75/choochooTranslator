@@ -13,5 +13,9 @@
     <ion-item>
         <ion-label>Limit word list length</ion-label>
         <ion-checkbox color="dark" [(ngModel)]="isListLimited" (ngModelChange)="toggleListLimited()"></ion-checkbox>
-      </ion-item>
+    </ion-item>
+    <ion-item>
+        <ion-label>Offline mode</ion-label>
+        <ion-checkbox color="dark" [(ngModel)]="isOffline" (ngModelChange)="toggleOffline()"></ion-checkbox>
+    </ion-item>
 </ion-content>

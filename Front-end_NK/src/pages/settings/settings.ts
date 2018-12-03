@@ -23,12 +23,17 @@ import * as dictionary from './vocab.json';
 export class SettingsPage {
 
     public isListLimited: boolean = true;
+    public isOffline: boolean = false;//Default value of offline setting
 
     constructor(public storage: Storage, public http: HttpClient){
         this.storage = storage;
         this.http = http;
         this.storage.get('isListLimited').then(state=>this.isListLimited = state).catch(()=>{
             this.storage.set('isListLimited',this.isListLimited);
+        });
+        //check if offline setting has been set in memory. if not create
+        this.storage.get('isOffline').then(state=>this.isOffline = state).catch(()=>{
+            this.storage.set('isOffline',this.isOffline);
         });
     }
 
@@ -76,7 +81,7 @@ export class SettingsPage {
             );
         });
     }
-
+    
     deleteDict(event){
         this.storage.remove('dictionary').then(
             () => console.log('Dummy data deleted'),
@@ -88,6 +93,13 @@ export class SettingsPage {
         //saving setting to storage
         this.storage.set('isListLimited',this.isListLimited);
         console.log("setting List limited to: " + this.isListLimited);
+    }
+    /**
+     * Method that toggles the is Offline setting. When isOffline true the app will only use the downloaded dictionary
+     */
+    toggleOffline(){
+        this.storage.set('isOffline', this.isOffline);
+        console.log("Setting Offline mode to: " + this.isOffline);
     }
 
 }
