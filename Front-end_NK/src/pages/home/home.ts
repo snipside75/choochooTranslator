@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController,NavParams, MenuController } from 'ionic-angular';
+import { NavController,NavParams, MenuController,ToastController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
 import { SERVER_URL } from '../../env/env';
@@ -21,6 +21,7 @@ export class HomePage {
   filter: string;
   fromLang: Language;
   toLang: Language;
+  searching: boolean;
 
   ngOnInit(){
     this.onInput(null);
@@ -40,23 +41,11 @@ export class HomePage {
         this.items = this.items.slice(0,49);
       }
     }).catch();
+    this.searching = false;
   }
 
   setItems(){
     this.items = [];
-    /*
-    this.items = [
-      new Word("crossing with movable point","toDo1","toDo1","toDo1"),
-      new Word("movable point frog","toDo1","toDo1","toDo1"),
-      new Word("common crossing","toDo1","toDo1","toDo1"),
-      new Word("frog","toDo1","toDo1","toDo1"),
-      new Word("first-class coach","toDo1","toDo1","toDo1"),
-      new Word("second-class coach","toDo1","toDo1","toDo1"),
-      new Word("obtuse crossing","toDo1","toDo1","toDo1"),
-      new Word("short-pitch corrugation","toDo1","toDo1","toDo1")
-    ];
-    */
-
   }
 
 
@@ -64,6 +53,7 @@ export class HomePage {
     console.log('From language: ' + Language[this.fromLang]);
     console.log('To language: ' + Language[this.toLang]);  
 
+    this.searching = true;
     this.setItems();
 
     //check if we are in offline mode
@@ -74,6 +64,12 @@ export class HomePage {
         });        
       } else {
         this.getItemsAPI().then().catch(()=>{  //If fetching data from server does not work do offline search
+          let toast = this.toastCtrl.create({
+            message: 'Could not connect to server, using offline dictionary',
+            duration: 5000,
+            position: 'top'
+          });
+          toast.present();
           this.getItemsStorage().then(()=>{
             this.filterItems();
           });
@@ -93,11 +89,12 @@ export class HomePage {
 
   
 
-  constructor(public navCtrl: NavController, menu: MenuController,public storage: Storage,public http: HttpClient) {
+  constructor(public navCtrl: NavController, menu: MenuController,public storage: Storage,public http: HttpClient, private toastCtrl: ToastController) {
     menu.enable(true);
     
     this.fromLang = 0;
     this.toLang = 1;
+    this.searching = false;
 
 
   }
@@ -131,8 +128,8 @@ export class HomePage {
   private getItemsAPI(){
     let promise = new Promise((resolve,reject)=>{
       
-      let url = SERVER_URL + 'translate/get_word/' + this.fromLang + '/' + this.toLang + this.filter;
-
+      let url = SERVER_URL + 'translate/get_word/' + Language[this.fromLang] + '/' + Language[this.toLang] + '/' + (this.filter == undefined ? '': this.filter);
+      console.log(url);
       this.http.get(url).subscribe((res)=>{
 
         this.items = res as Array<Word>;
