@@ -76,7 +76,6 @@ export class SettingsPage {
         this.storage.set('dictionary',{translations: debugTranslations, version: 1})
         .then(
             () => {
-                console.log('Dummy data created');
 
 
                 const toast = this.toastCtrl.create({
@@ -112,7 +111,6 @@ export class SettingsPage {
     deleteDict(event){
         this.storage.remove('dictionary').then(
             () => {
-                console.log('Dummy data deleted');
                 const toast = this.toastCtrl.create({
                     message: 'Dictionary deleted!',
                     duration: 5000,
@@ -127,14 +125,19 @@ export class SettingsPage {
     toggleListLimited(){
         //saving setting to storage
         this.storage.set('isListLimited',this.isListLimited);
-        console.log("setting List limited to: " + this.isListLimited);
     }
     /**
      * Method that toggles the is Offline setting. When isOffline true the app will only use the downloaded dictionary
      */
     toggleOffline(){
         this.storage.set('isOffline', this.isOffline);
-        console.log("Setting Offline mode to: " + this.isOffline);
+
+        const toast = this.toastCtrl.create({
+            message: 'you are now: ' + this.isOffline,
+            duration: 5000,
+            position: 'top'
+        });
+        toast.present();
     }
 
 }

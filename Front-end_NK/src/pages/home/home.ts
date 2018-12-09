@@ -48,11 +48,11 @@ export class HomePage {
     this.items = [];
   }
 
-
+  /**
+   * This method is fetches the words corresponding to the given languages and filter and sets them into the array items
+   * @param event the event that called this method
+   */
   onInput(event){
-    console.log('From language: ' + Language[this.fromLang]);
-    console.log('To language: ' + Language[this.toLang]);  
-
     this.searching = true;
     this.setItems();
 
@@ -129,7 +129,6 @@ export class HomePage {
     let promise = new Promise((resolve,reject)=>{
       
       let url = SERVER_URL + 'translate/get_word/' + Language[this.fromLang] + '/' + Language[this.toLang] + '/' + (this.filter == undefined ? '': this.filter);
-      console.log(url);
       this.http.get(url).subscribe((res)=>{
 
         this.items = res as Array<Word>;
@@ -147,7 +146,6 @@ export class HomePage {
       this.storage.get('dictionary').then((value)=>{
         let translationList: Array<Translation>;
         translationList = value.translations;
-        console.log(translationList);
         this.items = [];
   
         //this is not really efficient. needs to be hashmap?
