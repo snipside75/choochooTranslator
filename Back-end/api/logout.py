@@ -1,3 +1,5 @@
+# obsolete logout endpoint
+
 import flask_security
 from flask import Blueprint
 from flask.json import jsonify

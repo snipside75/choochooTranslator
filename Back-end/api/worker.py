@@ -1,3 +1,5 @@
+#worker for multitreading if needed
+
 import os
 
 import redis

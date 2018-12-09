@@ -66,7 +66,7 @@ class Mysql:
             if key == '*':
                 query += key
             else:
-                query += "`" + key + "`"
+                query += "" + key + ""
                 if i < l:
                     query += ","
         query += " FROM %s" % table
