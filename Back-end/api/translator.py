@@ -63,7 +63,7 @@ def get_suggest(lang_base, lang_to, word):
     for i in result:
         ids.append(i['word_id'])
     ids = format(str(tuple(ids)))
-    result = sql.select("translations as translation left join translations as translation1 on translation.word_id = translation1.word_id", "translation.word_id in {} and translation.language = '{}' and translation1.language = '{}'".format(ids, lang_base, lang_to), "translation.word_id, translation.word as original, translation1.word as word, translation1.description as definition, translation1.id as id")
+    result = sql.select("translations as translation left join translations as translation1 on translation.word_id = translation1.word_id", "translation.word_id in {} and translation.language = '{}' and translation1.language = '{}' LIMIT 50".format(ids, lang_base, lang_to), "translation.word_id, translation.word as original, translation1.word as word, translation1.description as definition, translation1.id as id")
     print(result)
     return make_response(jsonify(result))
 
