@@ -14,7 +14,7 @@ import re
 sql = Mysql()
 
 bp = Blueprint('translator', __name__, url_prefix='/translate')
-CORS(bp)
+CORS(bp, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 
 # @bp.route('/create', methods=['POST'])
@@ -49,6 +49,9 @@ def get_offline():
     result = sql.select("translations", "", "*")
     return make_response(jsonify(result))
 
+@bp.route('/get_suggest/<lang_base>/<lang_to>/', methods=['GET'])
+def get_suggest_empty(lang_base,lang_to):
+    return get_suggest(lang_base,lang_to,"")
 
 @bp.route('/get_suggest/<lang_base>/<lang_to>/<word>', methods=['GET'])
 def get_suggest(lang_base, lang_to, word):

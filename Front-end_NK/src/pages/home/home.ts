@@ -128,7 +128,7 @@ export class HomePage {
   private getItemsAPI(){
     let promise = new Promise((resolve,reject)=>{
       
-      let url = SERVER_URL + 'translate/get_word/' + Language[this.fromLang] + '/' + Language[this.toLang] + '/' + (this.filter == undefined ? '': this.filter);
+      let url = SERVER_URL + 'translate/get_suggest/' + Language[this.fromLang] + '/' + Language[this.toLang] + '/' + (this.filter == undefined ? '': this.filter);
       this.http.get(url).subscribe((res)=>{
 
         this.items = res as Array<Word>;

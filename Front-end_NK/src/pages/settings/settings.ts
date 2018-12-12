@@ -51,21 +51,20 @@ export class SettingsPage {
 
         let url = SERVER_URL + 'translate/get_offline'
 
-        this.http.get('/assets/vocab.json').subscribe(res =>{
+        this.http.get(url).subscribe(res =>{
             let dictionary = res as any;
         
 
         let debugTranslations = []; 
 
         
-        dictionary.translations.forEach(element => {
+        dictionary.forEach(element => {
             if(element.language == 'fi'){
                 element.language = Language.fi;
             } else if(element.language == 'en'){
                 element.language = Language.en;
             } else if (element.language == 'sv'){
                 element.language = Language.sv;
-                console.log(element.language);
             } else if (element.language == 'de'){
                 element.language = Language.de;
             }
@@ -86,7 +85,6 @@ export class SettingsPage {
                 toast.present();
         },
             error => {
-                console.error('Error storing dummy data', error);
                 const toast = this.toastCtrl.create({
                     message: 'Error storing dictionary',
                     duration: 5000,
@@ -133,7 +131,7 @@ export class SettingsPage {
         this.storage.set('isOffline', this.isOffline);
 
         const toast = this.toastCtrl.create({
-            message: 'you are now: ' + this.isOffline,
+            message: 'you are now: ' + (this.isOffline ? "Offline" : "Online"),
             duration: 5000,
             position: 'top'
         });
