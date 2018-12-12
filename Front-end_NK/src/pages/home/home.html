@@ -51,6 +51,7 @@
     </ion-row>
     <ion-row>
       <ion-searchbar
+        debounce=600
         [(ngModel)]="filter"
         [showCancelButton]="shouldShowCancel"
         (ionInput)="onInput($event)"
@@ -63,5 +64,11 @@
               <p>{{item.word}}</p>
             </button> 
         </ion-list>
+        <div *ngIf="items.length == 0" text-center>
+          <ion-spinner *ngIf="searching"></ion-spinner>
+          <br>
+          <button ion-button round outline color="secondary" (click)="onInput($event)">Refresh &nbsp;<ion-icon name="refresh"></ion-icon></button>
+
+        </div>
   </ion-grid>
 </ion-content>
