@@ -151,15 +151,14 @@ export class HomePage {
         //this is not really efficient. needs to be hashmap?
         translationList.forEach(element => {
           if(element.language == this.fromLang){
-            let newWord = new Word('','','','');
+            let newWord = new Word('','','');
             newWord.original = element.word;
   
             //search for corresponding id
             for(let i = 0; i < translationList.length; i++){
               if(translationList[i].language == this.toLang && translationList[i].word_id == element.word_id){
                 newWord.word = translationList[i].word;
-                newWord.example = translationList[i].example;
-                newWord.defintion = translationList[i].description;
+                newWord.definition = translationList[i].description;
   
                 //translation found now we can stop the loop
                 break;
